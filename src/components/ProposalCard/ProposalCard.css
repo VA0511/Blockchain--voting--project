@@ -1,0 +1,154 @@
+.proposal-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.proposal-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-md);
+}
+
+.proposal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.proposal-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.proposal-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.status-badge.active {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: var(--success);
+}
+
+.status-badge.pending {
+  background-color: rgba(255, 152, 0, 0.2);
+  color: var(--warning);
+}
+
+.status-badge.closed {
+  background-color: rgba(200, 200, 200, 0.2);
+  color: var(--text-tertiary);
+}
+
+.proposal-voting {
+  margin-bottom: var(--spacing-lg);
+}
+
+.proposal-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.stat-label.success {
+  color: var(--success);
+}
+
+.stat-value.success {
+  color: var(--success);
+}
+
+.stat-label.danger {
+  color: var(--danger);
+}
+
+.stat-value.danger {
+  color: var(--danger);
+}
+
+.proposal-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.btn {
+  flex: 1;
+  min-width: 100px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-success {
+  background-color: var(--success);
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: var(--success-light);
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: var(--danger-light);
+}
+
+.btn-secondary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-light);
+}
