@@ -1,0 +1,102 @@
+.voters-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+.voters-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.voters-table thead {
+  background-color: var(--bg-tertiary);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.voters-table th {
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.voters-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.voters-table tbody tr:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.voters-table td {
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--text-secondary);
+}
+
+.voters-table td.index {
+  text-align: center;
+  width: 50px;
+}
+
+.voters-table td.address {
+  font-family: monospace;
+  color: var(--primary-color);
+}
+
+.voters-table td.name {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.voters-table td.weight {
+  text-align: center;
+  font-weight: var(--font-weight-semibold);
+}
+
+.voters-table td.voted {
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.badge.yes {
+  background-color: rgba(72, 187, 120, 0.2);
+  color: var(--success);
+}
+
+.badge.no {
+  background-color: rgba(245, 101, 101, 0.2);
+  color: var(--danger);
+}
+
+.action {
+  text-align: center;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background-color: var(--bg-secondary);
+  color: var(--primary-color);
+}
