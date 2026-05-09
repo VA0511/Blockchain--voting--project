@@ -1,5 +1,7 @@
-import { Delegate } from '../types';
-import { Card } from '../components/Card';
+import type { Delegate } from '../../types';
+
+import { Card } from '../../components/Card/Card';
+
 import './Delegates.css';
 
 const mockDelegates: Delegate[] = [

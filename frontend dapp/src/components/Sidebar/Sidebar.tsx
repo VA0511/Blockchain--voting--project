@@ -9,16 +9,15 @@ interface SidebarProps {
 }
 
 const menuItems = [
-  { id: 'dashboard', label: 'Dashboard', icon: '📊' },
-  { id: 'voters', label: 'Voters', icon: '👥' },
-  { id: 'proposals', label: 'Proposals', icon: '📋' },
-  { id: 'myvotes', label: 'My Votes', icon: '✅' },
-  { id: 'delegates', label: 'Delegates', icon: '🤝' },
+  { id: 'Dashboard', label: 'Dashboard', icon: '📊' },
+  { id: 'Voters', label: 'Voters', icon: '👥' },
+  { id: 'Proposals', label: 'Proposals', icon: '📋' },
+  { id: 'My Votes', label: 'My Votes', icon: '✅' },
+  { id: 'Delegates', label: 'Delegates', icon: '🤝' },
 ];
 
 const adminMenuItems = [
-  { id: 'admin', label: 'Admin', icon: '⚙️' },
-  { id: 'settings', label: 'Settings', icon: '🔧' },
+  { id: 'Admin', label: 'Admin', icon: '⚙️' },
 ];
 
 export function Sidebar({ currentPage, onNavigate, userAddress, userRole }: SidebarProps) {

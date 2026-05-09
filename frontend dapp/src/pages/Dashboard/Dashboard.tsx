@@ -1,6 +1,7 @@
-import { VotingStats } from '../types';
-import { StatBox } from '../components/StatBox';
-import { Card } from '../components/Card';
+import type { VotingStats } from '../../types';
+
+import { StatBox } from '../../components/StatBox/StatBox';
+import { Card } from '../../components/Card/Card';
 import './Dashboard.css';
 
 const mockStats: VotingStats = {

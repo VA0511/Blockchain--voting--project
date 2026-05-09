@@ -1,5 +1,6 @@
-import { Card } from '../components/Card';
+import { Card } from '../../components/Card/Card';
 import './Admin.css';
+
 
 export function Admin() {
   return (

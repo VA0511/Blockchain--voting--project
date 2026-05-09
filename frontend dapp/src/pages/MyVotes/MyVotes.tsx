@@ -1,5 +1,5 @@
-import { Card } from '../components/Card';
-import { VoteProgressBar } from '../components/VoteProgressBar';
+import { Card } from '../../components/Card/Card';
+import { VoteProgressBar } from '../../components/VoteProgressBar/VoteProgressBar';
 import './MyVotes.css';
 
 interface MyVote {

@@ -1,4 +1,5 @@
-import { Voter } from '../types';
+import type { Voter } from '../../types';
+
 import './VotersTable.css';
 
 interface VotersTableProps {

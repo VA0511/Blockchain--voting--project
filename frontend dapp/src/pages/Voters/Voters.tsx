@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Voter } from '../types';
-import { VotersTable } from '../components/VotersTable';
-import { Card } from '../components/Card';
+import type { Voter } from '../../types';
+
+import { VotersTable } from '../../components/VotersTable/VotersTable';
+import { Card } from '../../components/Card/Card';
 import './Voters.css';
 
 const mockVoters: Voter[] = [

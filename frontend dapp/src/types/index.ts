@@ -44,3 +44,4 @@ export interface Delegate {
   votingPower: number;
   status: 'Active' | 'Inactive';
 }
+

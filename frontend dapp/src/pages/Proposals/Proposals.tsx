@@ -1,5 +1,6 @@
-import { Proposal } from '../types';
-import { ProposalCard } from '../components/ProposalCard';
+import type { Proposal } from '../../types';
+
+import { ProposalCard } from '../../components/ProposalCard/ProposalCard';
 import './Proposals.css';
 
 const mockProposals: Proposal[] = [

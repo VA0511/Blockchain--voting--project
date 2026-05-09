@@ -1,5 +1,6 @@
-import { Proposal } from '../types';
-import { VoteProgressBar } from './VoteProgressBar';
+import type { Proposal } from '../../types';
+
+import { VoteProgressBar } from '../VoteProgressBar/VoteProgressBar';
 import './ProposalCard.css';
 
 interface ProposalCardProps {
