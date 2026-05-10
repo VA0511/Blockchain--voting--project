@@ -8,9 +8,11 @@ import { Proposals } from './pages/Proposals/Proposals'
 import { MyVotes } from './pages/MyVotes/MyVotes'
 import { Delegates } from './pages/Delegates/Delegates'
 import { Admin } from './pages/Admin/Admin'
+import { Login } from './pages/Login/Login'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('Dashboard')
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const renderPage = () => {
     switch (currentPage) {
@@ -31,11 +33,19 @@ function App() {
     }
   }
 
+  const handleLogin = () => setIsAuthenticated(true)
+  const handleLogout = () => setIsAuthenticated(false)
+
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} />
+  }
+
   return (
     <MainLayout
       currentPage={currentPage}
       onNavigate={setCurrentPage}
       headerTitle={currentPage}
+      onLogout={handleLogout}
     >
       {renderPage()}
     </MainLayout>

@@ -6,6 +6,7 @@ interface SidebarProps {
   onNavigate: (page: string) => void;
   userAddress?: string;
   userRole?: string;
+  onDisconnect?: () => void;
 }
 
 const menuItems = [
@@ -20,7 +21,7 @@ const adminMenuItems = [
   { id: 'Admin', label: 'Admin', icon: '⚙️' },
 ];
 
-export function Sidebar({ currentPage, onNavigate, userAddress, userRole }: SidebarProps) {
+export function Sidebar({ currentPage, onNavigate, userAddress, userRole, onDisconnect }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
@@ -74,7 +75,7 @@ export function Sidebar({ currentPage, onNavigate, userAddress, userRole }: Side
       </nav>
 
       <div className="sidebar-footer">
-        <button className="disconnect-btn" title={isCollapsed ? 'Disconnect' : ''}>
+        <button className="disconnect-btn" title={isCollapsed ? 'Disconnect' : ''} onClick={onDisconnect}>
           <span className="icon">🔌</span>
           {!isCollapsed && <span>Disconnect</span>}
         </button>
