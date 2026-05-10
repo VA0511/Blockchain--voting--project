@@ -9,20 +9,23 @@ interface SidebarProps {
   onDisconnect?: () => void;
 }
 
-const menuItems = [
+const voterMenuItems = [
   { id: 'Dashboard', label: 'Dashboard', icon: '📊' },
-  { id: 'Voters', label: 'Voters', icon: '👥' },
   { id: 'Proposals', label: 'Proposals', icon: '📋' },
   { id: 'My Votes', label: 'My Votes', icon: '✅' },
   { id: 'Delegates', label: 'Delegates', icon: '🤝' },
 ];
 
-const adminMenuItems = [
-  { id: 'Admin', label: 'Admin', icon: '⚙️' },
+const chairpersonMenuItems = [
+  { id: 'Voters', label: 'Give Right to Vote', icon: '👥' },
+  { id: 'Proposals', label: 'Proposals', icon: '📋' },
 ];
 
 export function Sidebar({ currentPage, onNavigate, userAddress, userRole, onDisconnect }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const activeMenuItems = userRole === 'chairperson' ? chairpersonMenuItems : voterMenuItems;
+  const sectionTitle = userRole === 'chairperson' ? 'Chairperson' : 'Main';
 
   return (
     <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
@@ -42,8 +45,8 @@ export function Sidebar({ currentPage, onNavigate, userAddress, userRole, onDisc
 
       <nav className="sidebar-nav">
         <div className="nav-section">
-          <div className="nav-section-title">{!isCollapsed && 'Main'}</div>
-          {menuItems.map(item => (
+          <div className="nav-section-title">{!isCollapsed && sectionTitle}</div>
+          {activeMenuItems.map(item => (
             <button
               key={item.id}
               className={`nav-item ${currentPage === item.id ? 'active' : ''}`}
@@ -55,23 +58,6 @@ export function Sidebar({ currentPage, onNavigate, userAddress, userRole, onDisc
             </button>
           ))}
         </div>
-
-        {userRole === 'Admin' && (
-          <div className="nav-section">
-            <div className="nav-section-title">{!isCollapsed && 'Admin'}</div>
-            {adminMenuItems.map(item => (
-              <button
-                key={item.id}
-                className={`nav-item ${currentPage === item.id ? 'active' : ''}`}
-                onClick={() => onNavigate(item.id)}
-                title={isCollapsed ? item.label : ''}
-              >
-                <span className="nav-icon">{item.icon}</span>
-                {!isCollapsed && <span className="nav-label">{item.label}</span>}
-              </button>
-            ))}
-          </div>
-        )}
       </nav>
 
       <div className="sidebar-footer">

@@ -3,20 +3,30 @@ import { Card } from '../../components/Card/Card';
 import './Login.css';
 
 interface LoginProps {
-  onLogin?: () => void;
+  onLogin?: (role: string) => void;
 }
 
 export const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [accountName, setAccountName] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // TODO: Implement actual authentication or contract call logic here
-    console.log('Login attempt:', { accountName, password });
-    if (onLogin) {
-      onLogin(); // Trigger authentication state change
+    // Mock authentication for chairperson
+    if (accountName === 'chairperson' && password === '123456') {
+      setError('');
+      if (onLogin) {
+        onLogin('chairperson'); // Trigger authentication state change
+      }
+    } else if (accountName === 'voter' && password === '123456') {
+      setError('');
+      if (onLogin) {
+        onLogin('voter'); // Trigger standard user login
+      }
+    } else {
+      setError('Invalid account name or password');
     }
   };
 
@@ -47,6 +57,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
               required
             />
           </div>
+          {error && <div className="error-message">{error}</div>}
           <button type="submit" className="login-button">
             Login
           </button>

@@ -76,3 +76,9 @@
 .login-button:active {
   transform: scale(0.98);
 }
+
+.error-message {
+  color: #ff4d4f; /* Red color for error text */
+  font-size: 0.875rem;
+  text-align: center;
+}

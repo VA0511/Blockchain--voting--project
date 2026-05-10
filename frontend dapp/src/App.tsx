@@ -13,6 +13,7 @@ import { Login } from './pages/Login/Login'
 function App() {
   const [currentPage, setCurrentPage] = useState('Dashboard')
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [userRole, setUserRole] = useState('')
 
   const renderPage = () => {
     switch (currentPage) {
@@ -21,7 +22,7 @@ function App() {
       case 'Voters':
         return <Voters />
       case 'Proposals':
-        return <Proposals />
+        return <Proposals userRole={userRole} />
       case 'My Votes':
         return <MyVotes />
       case 'Delegates':
@@ -29,12 +30,19 @@ function App() {
       case 'Admin':
         return <Admin />
       default:
-        return <Dashboard />
+        return userRole === 'chairperson' ? <Voters /> : <Dashboard />
     }
   }
 
-  const handleLogin = () => setIsAuthenticated(true)
-  const handleLogout = () => setIsAuthenticated(false)
+  const handleLogin = (role: string) => {
+    setIsAuthenticated(true)
+    setUserRole(role)
+    setCurrentPage(role === 'chairperson' ? 'Voters' : 'Dashboard')
+  }
+  const handleLogout = () => {
+    setIsAuthenticated(false)
+    setUserRole('')
+  }
 
   if (!isAuthenticated) {
     return <Login onLogin={handleLogin} />
@@ -46,6 +54,7 @@ function App() {
       onNavigate={setCurrentPage}
       headerTitle={currentPage}
       onLogout={handleLogout}
+      userRole={userRole}
     >
       {renderPage()}
     </MainLayout>
