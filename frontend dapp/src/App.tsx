@@ -1,6 +1,19 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 
+// Define the type for the injected Ethereum provider
+interface EthereumProvider {
+  request: (args: { method: string; params?: unknown[] | object }) => Promise<unknown>;
+  on: (eventName: string, handler: () => void) => void;
+  removeListener: (eventName: string, handler: () => void) => void;
+}
+
+declare global {
+  interface Window {
+    ethereum?: EthereumProvider;
+  }
+}
+
 // Simplified ABI containing only the functions we need to interact with
 const ballotABI = [
   "function giveRightToVote(address voter) external",
@@ -38,10 +51,10 @@ export default function App() {
 
   // 1. Connect to MetaMask and Initialize Contract
   const connectWallet = async () => {
-    if ((window as any).ethereum) {
+    if (window.ethereum) {
       try {
         // Using ethers v6 syntax. (If using v5, use ethers.providers.Web3Provider)
-        const provider = new ethers.BrowserProvider((window as any).ethereum);
+        const provider = new ethers.BrowserProvider(window.ethereum as unknown as ConstructorParameters<typeof ethers.BrowserProvider>[0]);
         const signer = await provider.getSigner();
         setAccount(signer.address);
 
@@ -61,7 +74,7 @@ export default function App() {
 
   // Automatically reconnect when the account is switched in MetaMask
   useEffect(() => {
-    if ((window as any).ethereum) {
+    if (window.ethereum) {
       const handleAccountsChanged = () => {
         if (contractAddress) {
           connectWallet();
@@ -70,8 +83,8 @@ export default function App() {
         }
       };
       
-      (window as any).ethereum.on('accountsChanged', handleAccountsChanged);
-      return () => (window as any).ethereum.removeListener('accountsChanged', handleAccountsChanged);
+      window.ethereum.on('accountsChanged', handleAccountsChanged);
+      return () => window.ethereum?.removeListener('accountsChanged', handleAccountsChanged);
     }
   }, [contractAddress]);
 
@@ -82,9 +95,10 @@ export default function App() {
       const tx = await contract.giveRightToVote(voterAddress);
       await tx.wait(); // Wait for the transaction to be mined
       alert("Right to vote granted successfully!");
-    } catch (error: any) {
-      console.error(error);
-      alert("Error: " + (error.reason || error.message));
+    } catch (err: unknown) {
+      const error = err as { reason?: string; message?: string };
+      console.error(err);
+      alert("Error: " + (error.reason || error.message || "Unknown error occurred"));
     }
   };
 
@@ -95,9 +109,10 @@ export default function App() {
       const tx = await contract.vote(proposalIndex);
       await tx.wait();
       alert("Voted successfully!");
-    } catch (error: any) {
-      console.error(error);
-      alert("Error: " + (error.reason || error.message));
+    } catch (err: unknown) {
+      const error = err as { reason?: string; message?: string };
+      console.error(err);
+      alert("Error: " + (error.reason || error.message || "Unknown error occurred"));
     }
   };
 
@@ -108,9 +123,10 @@ export default function App() {
       const tx = await contract.delegate(delegateTo);
       await tx.wait();
       alert("Delegated successfully!");
-    } catch (error: any) {
-      console.error(error);
-      alert("Error: " + (error.reason || error.message));
+    } catch (err: unknown) {
+      const error = err as { reason?: string; message?: string };
+      console.error(err);
+      alert("Error: " + (error.reason || error.message || "Unknown error occurred"));
     }
   };
 
@@ -122,9 +138,10 @@ export default function App() {
       // Convert bytes32 to string. (If using v5, use ethers.utils.parseBytes32String)
       const decodedName = ethers.decodeBytes32String(winnerBytes32);
       setWinnerName(decodedName);
-    } catch (error: any) {
-      console.error(error);
-      alert("Error: " + (error.reason || error.message));
+    } catch (err: unknown) {
+      const error = err as { reason?: string; message?: string };
+      console.error(err);
+      alert("Error: " + (error.reason || error.message || "Unknown error occurred"));
     }
   };
 
@@ -143,9 +160,10 @@ export default function App() {
       } else {
         setVoterStatus(`Authorized and READY to vote (Weight: ${weight}).`);
       }
-    } catch (error: any) {
-      console.error(error);
-      alert("Error: " + (error.reason || error.message));
+    } catch (err: unknown) {
+      const error = err as { reason?: string; message?: string };
+      console.error(err);
+      alert("Error: " + (error.reason || error.message || "Unknown error occurred"));
     }
   };
 
