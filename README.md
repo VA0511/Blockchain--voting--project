@@ -101,9 +101,7 @@ Now, let's start the React web app.
 5. **View Results:**
    - Click **Get Winner Name** under the "Results" section to query the blockchain and see who is currently winning.
 
-## 📝 Note: 
-when run the local hardhat account, each node will give out different test account, therefore you will be required to manually modify the app.tsx file to add those test accounts on your local hardhat node. Here a guide on how to apply the changes:
-1. After initiating your local hardhat node, it will 
+
 
 ## 🛑 Troubleshooting
 
