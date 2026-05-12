@@ -14,6 +14,7 @@ A full-stack Web3 voting application built with React, TypeScript, Ethers.js, an
 Before running this project, make sure you have the following installed:
 1. **[Node.js](https://nodejs.org/en/)** (v16 or higher recommended)
 2. **[MetaMask Extension](https://metamask.io/)** installed in your browser.
+3. **[Solidity Extension](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)** installed in your VSCode or your preferred IDE.
 
 ---
 
@@ -57,6 +58,8 @@ To interact with the local blockchain, you need to connect MetaMask to it and im
    - Paste the **Private Key** of Account #0 from the Hardhat node terminal. This is the **Chairperson**.
    - Repeat this process for Account #1, #2, etc., to act as standard voters.
 
+Note: When run the local hardhat account for the first time, each node will give out different test account, therefore you will be required to manually modify the app.tsx file to add those test accounts on your local hardhat node. Locate the app.tsx file and locate the TEST_USER array in the file, apply the addresses of your test accounts instead. 
+
 ### 3. Set up the User Interface (Frontend)
 Now, let's start the React web app.
 
@@ -98,7 +101,9 @@ Now, let's start the React web app.
 5. **View Results:**
    - Click **Get Winner Name** under the "Results" section to query the blockchain and see who is currently winning.
 
----
+## 📝 Note: 
+when run the local hardhat account, each node will give out different test account, therefore you will be required to manually modify the app.tsx file to add those test accounts on your local hardhat node. Here a guide on how to apply the changes:
+1. After initiating your local hardhat node, it will 
 
 ## 🛑 Troubleshooting
 
