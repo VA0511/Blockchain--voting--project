@@ -168,71 +168,71 @@ export default function App() {
   };
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: 'auto' }}>
-      <h1>Decentralized Voting App</h1>
+    <div style={{ padding: '10px 20px', fontFamily: 'Arial, sans-serif', maxWidth: '1000px', margin: 'auto' }}>
+      <h1 style={{ textAlign: 'center', margin: '10px 0' }}>Decentralized Voting App</h1>
       
-      <div style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
-        <h3>Setup</h3>
+      <div style={{ marginBottom: '15px', padding: '10px', border: '1px solid #ccc' }}>
+        <h3 style={{ margin: '0 0 10px 0' }}>Setup</h3>
         <input 
           type="text" 
           placeholder="Deployed Contract Address" 
           value={contractAddress} 
           onChange={(e) => setContractAddress(e.target.value)} 
-          style={{ width: '100%', marginBottom: '10px', padding: '5px' }}
+          style={{ width: '100%', marginBottom: '10px', padding: '8px' }}
         />
-        <button onClick={connectWallet} style={{ padding: '10px' }}>
+        <button onClick={connectWallet} style={{ padding: '8px 15px' }}>
           {account ? `Connected: ${account.substring(0,6)}...${account.substring(38)}` : "Connect Wallet"}
         </button>
       </div>
 
       {contract && (
-        <>
-          <div style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
-            <h3>Chairperson: Give Right To Vote</h3>
-            <select value={voterAddress} onChange={(e) => setVoterAddress(e.target.value)} style={{ padding: '5px', marginRight: '10px', width: '250px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '15px' }}>
+          <div style={{ padding: '10px', border: '1px solid #ccc' }}>
+            <h3 style={{ margin: '0 0 10px 0' }}>Chairperson: Give Right To Vote</h3>
+            <select value={voterAddress} onChange={(e) => setVoterAddress(e.target.value)} style={{ padding: '8px', marginRight: '10px', width: '100%', maxWidth: '250px', marginBottom: '10px' }}>
               {TEST_USERS.map((user) => (
                 <option key={user.id} value={user.address}>User #{user.id} ({user.address.substring(0, 6)}...)</option>
               ))}
             </select>
-            <button onClick={handleGiveRightToVote}>Authorize</button>
+            <button onClick={handleGiveRightToVote} style={{ padding: '8px 15px' }}>Authorize</button>
           </div>
 
-          <div style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
-            <h3>Vote</h3>
-            <select value={proposalIndex} onChange={(e) => setProposalIndex(e.target.value)} style={{ padding: '5px', marginRight: '10px', width: '250px' }}>
+          <div style={{ padding: '10px', border: '1px solid #ccc' }}>
+            <h3 style={{ margin: '0 0 10px 0' }}>Vote</h3>
+            <select value={proposalIndex} onChange={(e) => setProposalIndex(e.target.value)} style={{ padding: '8px', marginRight: '10px', width: '100%', maxWidth: '250px', marginBottom: '10px' }}>
               <option value="0">0: candidate1</option>
               <option value="1">1: candidate2</option>
             </select>
-            <button onClick={handleVote}>Vote</button>
+            <button onClick={handleVote} style={{ padding: '8px 15px' }}>Vote</button>
           </div>
 
-          <div style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
-            <h3>Delegate Vote</h3>
-            <select value={delegateTo} onChange={(e) => setDelegateTo(e.target.value)} style={{ padding: '5px', marginRight: '10px', width: '250px' }}>
+          <div style={{ padding: '10px', border: '1px solid #ccc' }}>
+            <h3 style={{ margin: '0 0 10px 0' }}>Delegate Vote</h3>
+            <select value={delegateTo} onChange={(e) => setDelegateTo(e.target.value)} style={{ padding: '8px', marginRight: '10px', width: '100%', maxWidth: '250px', marginBottom: '10px' }}>
               {TEST_USERS.map((user) => (
                 <option key={user.id} value={user.address}>User #{user.id} ({user.address.substring(0, 6)}...)</option>
               ))}
             </select>
-            <button onClick={handleDelegate}>Delegate</button>
+            <button onClick={handleDelegate} style={{ padding: '8px 15px' }}>Delegate</button>
           </div>
 
-          <div style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
-            <h3>Results</h3>
-            <button onClick={handleGetWinner} style={{ marginBottom: '10px' }}>Get Winner Name</button>
+          <div style={{ padding: '10px', border: '1px solid #ccc' }}>
+            <h3 style={{ margin: '0 0 10px 0' }}>Results</h3>
+            <button onClick={handleGetWinner} style={{ padding: '8px 15px', marginBottom: '10px' }}>Get Winner Name</button>
             {winnerName && <p><strong>Leading Proposal:</strong> {winnerName}</p>}
           </div>
 
-          <div style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ccc' }}>
-            <h3>Check Voter Status</h3>
-            <select value={checkAddress} onChange={(e) => setCheckAddress(e.target.value)} style={{ padding: '5px', marginRight: '10px', width: '250px' }}>
+          <div style={{ padding: '10px', border: '1px solid #ccc' }}>
+            <h3 style={{ margin: '0 0 10px 0' }}>Check Voter Status</h3>
+            <select value={checkAddress} onChange={(e) => setCheckAddress(e.target.value)} style={{ padding: '8px', marginRight: '10px', width: '100%', maxWidth: '250px', marginBottom: '10px' }}>
               {TEST_USERS.map((user) => (
                 <option key={user.id} value={user.address}>User #{user.id} ({user.address.substring(0, 6)}...)</option>
               ))}
             </select>
-            <button onClick={handleCheckVoter}>Check Status</button>
+            <button onClick={handleCheckVoter} style={{ padding: '8px 15px' }}>Check Status</button>
             {voterStatus && <p style={{ marginTop: '10px' }}><strong>Status:</strong> {voterStatus}</p>}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
