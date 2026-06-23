@@ -1,0 +1,42 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_24-2de02ecba4d55233c1260827df0045f719392558",
+  "solcVersion": "0.8.24",
+  "solcLongVersion": "0.8.24+commit.e11b9ed9",
+  "compilerType": "solc",
+  "userSourceNameMap": {
+    "contracts/3_Ballot.sol": "project/contracts/3_Ballot.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "shanghai",
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode.linkReferences",
+            "evm.bytecode.object",
+            "evm.bytecode.opcodes",
+            "evm.bytecode.sourceMap",
+            "evm.deployedBytecode.immutableReferences",
+            "evm.deployedBytecode.linkReferences",
+            "evm.deployedBytecode.object",
+            "evm.deployedBytecode.opcodes",
+            "evm.deployedBytecode.sourceMap",
+            "evm.methodIdentifiers"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/3_Ballot.sol": {
+        "content": "// SPDX-License-Identifier: GPL-3.0\r\npragma solidity >=0.7.0 <0.9.0;\r\n\r\ncontract Ballot {\r\n    struct Voter {\r\n        uint weight; // weight is accumulated by delegation\r\n        bool voted;  // if true, that person already voted\r\n        address delegate; // person delegated to\r\n        uint vote;   // index of the voted proposal\r\n    }\r\n\r\n    struct Proposal {\r\n        bytes32 name;   // short name (up to 32 bytes)\r\n        uint voteCount; // number of accumulated votes\r\n    }\r\n\r\n    address public chairperson;\r\n\r\n    // This declares a state variable that\r\n    // stores a 'Voter' struct for each possible address.\r\n    mapping(address => Voter) public voters;\r\n\r\n    // A dynamically-sized array of 'Proposal' structs.\r\n    Proposal[] public proposals;\r\n\r\n    constructor(bytes32[] memory proposalNames) {\r\n        chairperson = msg.sender;\r\n        voters[chairperson].weight = 1;\r\n\r\n        for (uint i = 0; i < proposalNames.length; i++) {\r\n            proposals.push(Proposal({\r\n                name: proposalNames[i],\r\n                voteCount: 0\r\n            }));\r\n        }\r\n    }\r\n\r\n    function giveRightToVote(address voter) external {\r\n        require(\r\n            msg.sender == chairperson,\r\n            \"Only chairperson can give right to vote.\"\r\n        );\r\n        require(\r\n            !voters[voter].voted,\r\n            \"The voter already voted.\"\r\n        );\r\n        require(voters[voter].weight == 0, \"Voter already has the right to vote.\");\r\n        voters[voter].weight = 1;\r\n    }\r\n\r\n    function delegate(address to) external {\r\n        // assigns reference\r\n        Voter storage sender = voters[msg.sender];\r\n        require(sender.weight != 0, \"You have no right to vote\");\r\n        require(!sender.voted, \"You already voted.\");\r\n\r\n        require(to != msg.sender, \"Self-delegation is disallowed.\");\r\n\r\n        while (voters[to].delegate != address(0)) {\r\n            to = voters[to].delegate;\r\n\r\n            // if there's a loop in the delegation, not allowed.\r\n            require(to != msg.sender, \"Found loop in delegation.\");\r\n        }\r\n\r\n        Voter storage delegate_ = voters[to];\r\n\r\n        // Voters cannot delegate to accounts that cannot vote.\r\n        require(delegate_.weight >= 1);\r\n\r\n        // Since 'sender' is a reference, this\r\n        // modifies 'voters[msg.sender]'.\r\n        sender.voted = true;\r\n        sender.delegate = to;\r\n\r\n        if (delegate_.voted) {\r\n            // If the delegate already voted,\r\n            // directly add to the number of votes\r\n            proposals[delegate_.vote].voteCount += sender.weight;\r\n        } else {\r\n            delegate_.weight += sender.weight;\r\n        }\r\n    }\r\n\r\n    function vote(uint proposal) external {\r\n        Voter storage sender = voters[msg.sender];\r\n        require(sender.weight != 0, \"Has no right to vote\");\r\n        require(!sender.voted, \"Already voted.\");\r\n        sender.voted = true;\r\n        sender.vote = proposal;\r\n\r\n        proposals[proposal].voteCount += sender.weight;\r\n    }\r\n\r\n    function winningProposal() public view\r\n            returns (uint winningProposal_)\r\n    {\r\n        uint winningVoteCount = 0;\r\n        for (uint p = 0; p < proposals.length; p++) {\r\n            if (proposals[p].voteCount > winningVoteCount) {\r\n                winningVoteCount = proposals[p].voteCount;\r\n                winningProposal_ = p;\r\n            }\r\n        }\r\n    }\r\n\r\n    function winnerName() external view\r\n            returns (bytes32 winnerName_)\r\n    {\r\n        winnerName_ = proposals[winningProposal()].name;\r\n    }\r\n}\r\n"
+      }
+    }
+  }
+}
