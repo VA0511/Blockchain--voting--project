@@ -40,7 +40,7 @@ First, we need to start a local Ethereum network and deploy our smart contract.
 4. **Deploy the Smart Contract:** 
    Open a *second* terminal, navigate to the `Backend` folder, and run your deployment script:
    ```bash
-   npx hardhat run scripts/deploy_with_web3.ts --network localhost
+   npx hardhat run scripts/deploy_with_ethers.ts --network localhost
    ```
    *Note: Save the deployed contract address printed in the terminal. You will need it for the frontend.*
 
