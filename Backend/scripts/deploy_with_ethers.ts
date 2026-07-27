@@ -1,7 +1,3 @@
-// This script can be used to deploy the "Ballot" contract using ethers.js library.
-// Please make sure to compile "./contracts/3_Ballot.sol" file before running this script.
-// And use Right click -> "Run" from context menu of the file to run the script. Shortcut: Ctrl+Shift+S
-
 import { ethers } from 'ethers';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -9,11 +5,9 @@ import * as path from 'path';
 async function main() {
   try {
     // 1. Connect to a local Ethereum node (e.g., Hardhat Network or Ganache)
-    // Make sure to have a local node running on 127.0.0.1:8545
     const provider = new ethers.JsonRpcProvider('http://127.0.0.1:8545');
 
     // 2. Setup a wallet with a standard test private key (Hardhat account #0)
-    // DO NOT use this private key in production!
     const privateKey = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
     const wallet = new ethers.Wallet(privateKey, provider);
 
@@ -42,10 +36,10 @@ async function main() {
 
     console.log("Deploying contract...");
     const contract = await factory.deploy(proposalNames);
-    await contract.waitForDeployment(); // Note: if you use ethers v5, change this to: await contract.deployed()
+    await contract.waitForDeployment(); 
 
     console.log(`Contract deployed successfully!`);
-    console.log(`Address: ${await contract.getAddress()}`); // Note: if you use ethers v5, change this to: contract.address
+    console.log(`Address: ${await contract.getAddress()}`);
   } catch (e: any) {
     console.error("Error deploying contract:", e.message || e);
   }
